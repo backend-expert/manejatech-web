@@ -3,7 +3,7 @@
       <h1>Entrar</h1>
 
       <main class="form-signinw-100 m-auto">
-        <form @submit.stop.prevent="submit" >
+        <form>
           <img class="mb-4" src="../assets/images/logo.png" alt="logotipo" width="72" height="57">
           
           <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
@@ -43,11 +43,11 @@
 <script>
   // import axios from 'axios';
   import api from '@/services/api';
-  import Cookie from './js-cookie';
+  import Cookie from 'js-cookie';
   
   
     export default {
-      name: 'About',
+      name: 'Entrar',
   
       data () {
         return {
@@ -58,36 +58,52 @@
   
       methods: {
         submit(){
+
+          const payload = {
+                email: this.email,
+                password: this.password
+            };
+
+            //conexao ajax
+            api.post('/login', payload).then((response) => {
+                console.log(response);
+
+                // const token = `${response.data.token_type} ${response.data.access_token}`; 
+
+                // Cookie.set('_todolist_token', token, {
+                //     expires:30
+                // });
+            });
       
-        axios({
-          method: "post",
-          url: "/login",
-          headers: {
-              'Content-Type': 'application/json',
-              'Access': 'application/json',
-              'Accept-Language': 'pt-BR'
-            },
-            body: JSON.stringify({
-              email: this.email,
-              password: this.password
-            })
-        });
+        // axios({
+        //   method: "post",
+        //   url: "/login",
+        //   headers: {
+        //       'Content-Type': 'application/json',
+        //       'Access': 'application/json',
+        //       'Accept-Language': 'pt-BR'
+        //     },
+        //     body: JSON.stringify({
+        //       email: this.email,
+        //       password: this.password
+        //     })
+        // });
 
           // console.log('here');
           // api.post(`5544/api/login`, {
-          axios.post(`/api/login`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Access': 'application/json',
-              'Accept-Language': 'pt-BR'
-            },
-            body: JSON.stringify({
-              email: this.email,
-              password: this.password
-            })
+          // axios.post(`/api/login`, {
+          //   method: 'POST',
+          //   headers: {
+          //     'Content-Type': 'application/json',
+          //     'Access': 'application/json',
+          //     'Accept-Language': 'pt-BR'
+          //   },
+          //   body: JSON.stringify({
+          //     email: this.email,
+          //     password: this.password
+          //   })
   
-          })
+          // })
           // .then(response =>response.json())
           // .then(res => {
           //   Cookie.set('token_user', res.access_token)

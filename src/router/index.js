@@ -24,7 +24,7 @@ const routes = [
 
   {
     path: '/entrar',
-    name: 'entrar',
+    name: 'Entrar',
    
     component: function () {
       return import('../views/EntrarView.vue')
@@ -37,6 +37,15 @@ const routes = [
 
     component: function () {
       return import('../views/TestesViewApi.vue')
+    }
+  },
+
+  {
+    path: '/info',
+    name: 'info',
+
+    component: function () {
+      return import('../views/Info.vue')
     }
   },
 
