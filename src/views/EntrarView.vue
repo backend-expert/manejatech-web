@@ -11,19 +11,28 @@
           <div class="form-floating">
             <input
               v-model="email" 
-              type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+              type="email" 
+              class="form-control" 
+              id="floatingInput" 
+              placeholder="name@example.com">
             <label for="floatingInput">Email address</label>
           </div>
       
           <div class="form-floating">
             <input 
               v-model="password"
-              type="password" class="form-control" id="floatingPassword" placeholder="Password">
+              type="password" 
+              class="form-control" 
+              id="floatingPassword" 
+              placeholder="Password">
             <label for="floatingPassword">Password</label>
           </div>
       
         
-          <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+          <button 
+            @click.prevent="submit()"
+            class="w-100 btn btn-lg btn-primary" 
+            type="submit">Sign in</button>
           <p class="mt-5 mb-3 text-body-secondary">&copy; 2017–2023</p>
         </form>
       </main>
@@ -31,10 +40,10 @@
     </div>
 </template>
   
-  <script>
- import axios from 'axios';
-//  import api from '@/services/api';
-  // import Cookie from './js-cookie';
+<script>
+  // import axios from 'axios';
+  import api from '@/services/api';
+  import Cookie from './js-cookie';
   
   
     export default {
@@ -64,8 +73,9 @@
             })
         });
 
-          //console.log('here');
-          axios.post(`5544/api/login`, {
+          // console.log('here');
+          // api.post(`5544/api/login`, {
+          axios.post(`/api/login`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
