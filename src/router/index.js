@@ -1,22 +1,90 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import { createRouter, createWebHistory } from 'vue-router';
+import HomeView from '../views/HomeView.vue';
+import Auth from '../services/middleware';
 
 const routes = [
-  {
-    path: '/',
-    name: 'home',
-    component: HomeView
-  },
+  { path: '/', name: 'home', component: HomeView },
   {
     path: '/about',
     name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
+
     component: function () {
-      return import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+      return import('../views/AboutView.vue')
     }
-  }
+  },  
+  {
+    path: '/usuarios',
+    name: 'usuarios',
+   
+    component: () =>  import('../views/usuarios/UsuariosView.vue')
+    
+    // ,beforeEnter: Auth.auth,
+    
+  },
+
+  {
+    path: '/entrar',
+    name: 'entrar',
+   
+    component: function () {
+      return import('../views/EntrarView.vue')
+    }
+  },
+
+  {
+    path: '/teste-api',
+    name: 'teste-api',
+
+    component: function () {
+      return import('../views/TestesViewApi.vue')
+    }
+  },
+
+  {
+    path: '/relatorios',
+    name: 'relatorios',
+
+    component: function () {
+      return import('../views/Relatorios/index.vue')
+    }
+  },  
+
+  // route usuarios
+  {
+    path: '/novo-usuario',
+    name: 'novo-usuario',
+
+    component: function () {
+      return import('../views/usuarios/CriarUsuarioView.vue')
+    }
+  },
+
+
+  // rotas plantas
+  {
+    path: '/nova-planta',
+    name: 'nova-planta',
+
+    component: function () {
+      return import('../views/plantas/CriarPlantaView.vue')
+    }
+  },
+  {
+    path: '/plantas',
+    name: 'plantas',
+    // component: () => import('../views/PlantasView.vue'),beforeEnter: Auth.auth,
+
+    component: function () {
+      return import('../views/plantas/PlantasView.vue')
+    }
+   
+  },
+  {
+    path: '/planta',
+    name: 'planta',
+    component: function () { return import('../views/plantas/PlantaView.vue') }
+  
+  },
 ]
 
 const router = createRouter({
