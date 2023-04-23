@@ -18,9 +18,13 @@
           </tr>
           </thead>
           <tbody>
-          <!-- <tr v-for="product in products" :key="product.id"> -->
+          <!-- <tr 
+            v-for="user in users" 
+            :key="user.id"
+            > -->
+
           <tr>
-              <!-- <td>{{ product.id }}</td> -->
+              <!-- <td>{{ user.id }}</td> -->
               <td>23</td>
               <td>cezar loures</td>
               <td>cezar@gmail.com</td>
@@ -41,28 +45,27 @@
 </template>
 
 <script>
+import axios from '@/services/api';
   export default {
-      // data() {
-      //     return {
-      //         products: []
-      //     }
-      // },
-      // created() {
-      //     this.axios
-      //         .get('http://localhost:8000/api/products/')
-      //         .then(response => {
-      //             this.products = response.data;
-      //         });
-      // },
-      // methods: {
-      //     deleteProduct(id) {
-      //         this.axios
-      //             .delete(`http://localhost:8000/api/products/${id}`)
-      //             .then(response => {
-      //                 let i = this.products.map(data => data.id).indexOf(id);
-      //                 this.products.splice(i, 1)
-      //             });
-      //     }
-      // }
+    //   data() {
+    //       return {
+    //           users: []
+    //       }
+    //   },
+    //   created() {
+    //       axios.post('').then(response => {
+    //               this.users = response.data;
+    //           });
+    //   },
+    //   methods: {
+    //       deleteProduct(id) {
+    //           this.axios
+    //               .delete(`http://localhost:8000/api/products/${id}`)
+    //               .then(response => {
+    //                   let i = this.products.map(data => data.id).indexOf(id);
+    //                   this.products.splice(i, 1)
+    //               });
+    //       }
+    //   }
   }
 </script>

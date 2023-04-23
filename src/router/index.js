@@ -64,7 +64,7 @@ const routes = [
     name: 'novo-usuario',
 
     component: function () {
-      return import('../views/usuarios/CriarUsuarioView.vue')
+      return import('../views/usuarios/CriarUsuario.vue')
     }
   },
 

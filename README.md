@@ -24,4 +24,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 2. axios
 `npm install axios` 
 
+3. bootstrap
+`npm install bootstrap`
+
 
