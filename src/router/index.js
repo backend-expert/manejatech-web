@@ -16,18 +16,20 @@ const routes = [
     path: '/usuarios',
     name: 'usuarios',
    
-    component: () =>  import('../views/usuarios/UsuariosView.vue')
-    
-    // ,beforeEnter: Auth.auth,
+    component: () =>  import('../views/usuarios/')
+     // ,beforeEnter: Auth.auth,
     
   },
 
   {
     path: '/entrar',
     name: 'Entrar',
+    beforeEnter: Auth.auth,
+
+    // component: () => import('../views/Plantas.vue'),beforeEnter: Auth.auth,
    
     component: function () {
-      return import('../views/EntrarView.vue')
+      return import('../views/Entrar.vue')    
     }
   },
 
@@ -36,7 +38,7 @@ const routes = [
     name: 'teste-api',
 
     component: function () {
-      return import('../views/TestesViewApi.vue')
+      return import('../views/TestesApi.vue')
     }
   },
 
@@ -54,7 +56,7 @@ const routes = [
     name: 'relatorios',
 
     component: function () {
-      return import('../views/Relatorios/index.vue')
+      return import('../views/Relatorios/')
     }
   },  
 
@@ -64,7 +66,7 @@ const routes = [
     name: 'novo-usuario',
 
     component: function () {
-      return import('../views/usuarios/CriarUsuario.vue')
+      return import('../views/usuarios/CadastrarUsuario.vue')
     }
   },
 
@@ -75,23 +77,23 @@ const routes = [
     name: 'nova-planta',
 
     component: function () {
-      return import('../views/plantas/CriarPlantaView.vue')
+      return import('../views/plantas/CadastrarPlanta.vue')
     }
   },
   {
     path: '/plantas',
     name: 'plantas',
-    // component: () => import('../views/PlantasView.vue'),beforeEnter: Auth.auth,
+    // component: () => import('../views/Plantas.vue'),beforeEnter: Auth.auth,
 
     component: function () {
-      return import('../views/plantas/PlantasView.vue')
+      return import('../views/plantas/')
     }
    
   },
   {
     path: '/planta',
     name: 'planta',
-    component: function () { return import('../views/plantas/PlantaView.vue') }
+    component: function () { return import('../views/plantas/Planta.vue') }
   
   },
 ]

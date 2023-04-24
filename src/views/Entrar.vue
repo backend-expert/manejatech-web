@@ -1,12 +1,25 @@
 <template>
-    <div class="about">
-      <h1>Entrar</h1>
+   
+      <h1>Testes H!</h1>
+
+      <div
+            v-if="_response.message"
+            :class="`${_response.color}`"
+        >
+        <h3
+        :class="`${_response.color}`"
+        >
+            {{ _response.message }}
+        </h3>
+
+        </div>
 
       <main class="form-signinw-100 m-auto">
-        <form>
-          <img class="mb-4" src="../assets/images/logo.png" alt="logotipo" width="72" height="57">
+
+        <form @submit.prevent="onSubmitLogin()">
+          <img class="mb-4" src="@/assets/images/logo.png" alt="logotipo" width="72" height="57">
           
-          <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+          <h1 class="h3 mb-3 fw-normal">Entrar</h1>
       
           <div class="form-floating">
             <input
@@ -16,7 +29,7 @@
               id="floatingInput" 
               placeholder="name@example.com">
             <label for="floatingInput">Email address</label>
-          </div>
+          </div> <br>
       
           <div class="form-floating">
             <input 
@@ -26,23 +39,33 @@
               id="floatingPassword" 
               placeholder="Password">
             <label for="floatingPassword">Password</label>
-          </div>
+          </div> <br>
       
         
           <button 
-            @click.prevent="submit()"
             class="w-100 btn btn-lg btn-primary" 
-            type="submit">Sign in</button>
-          <p class="mt-5 mb-3 text-body-secondary">&copy; 2017–2023</p>
+            type="submit"
+            :disabled="spinner.login"
+          >
+            <img 
+              v-if="spinner.login"
+              src="@/assets/images/icons8-spinner.gif" alt=""
+            >
+        
+          Entrar
+          </button>
+          
+            <p class="mt-5 mb-3 text-body-secondary">&copy; 2017–2023</p>
         </form>
       </main>
   
-    </div>
+    
 </template>
   
 <script>
   // import axios from 'axios';
-  import api from '@/services/api';
+  import axios from '@/services/api';
+  import message from '@/helpers/messages';
   import Cookie from 'js-cookie';
   
   
@@ -52,28 +75,55 @@
       data () {
         return {
           email: '',
-          password: ''
+          password: '',
+
+          _response: {
+                color: '',
+                message:'',
+            },
+
+            spinner: {
+                login: false
+            },
         };
       },
   
       methods: {
-        submit(){
+        onSubmitLogin(){
 
           const payload = {
                 email: this.email,
                 password: this.password
             };
 
+            this.resetResponse();
+
+            this.spinner.login = true;
+
+         
+
             //conexao ajax
-            api.post('/login', payload).then((response) => {
+            axios.post('/login', payload).then((response) => {
                 console.log(response);
 
                 // const token = `${response.data.token_type} ${response.data.access_token}`; 
+                const bearer = 'bearer';
+                const token = `${bearer} ${response.data.token}`; 
 
-                // Cookie.set('_todolist_token', token, {
-                //     expires:30
-                // });
-            });
+                console.log('token', token);
+
+                Cookie.set('admin_token', token, {
+                    expires:30
+                });
+            })
+            .catch((error) => {
+                    this.spinner.login = false;
+
+                    const errorCode = error?.response?.data?.error || 'ServerError';
+                    this._response.color = 'red',
+                    this._response.message = message[errorCode]
+                   
+                });
       
         // axios({
         //   method: "post",
@@ -111,24 +161,17 @@
           // });
   
         },
+
+        resetResponse() {
+            this._response.color = '',
+            this._response.message = ''
+        },
   
       },
     };
   </script>
   
-  <style>
-  html,
-  body {
-    height: 100%;
-  }
-  
-  body {
-    display: flex;
-    align-items: center;
-    padding-top: 40px;
-    padding-bottom: 40px;
-    background-color: #f5f5f5;
-  }
+  <style scoped>
   
   .form-signin {
     max-width: 330px;

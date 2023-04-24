@@ -1,0 +1,11 @@
+/* global style css  */
+
+html,
+  body {
+    height: 100%;
+  }
+  h1 {
+    color:yellowgreen ;
+    font-weight: 600;
+    font-size: 3rem;
+  }
