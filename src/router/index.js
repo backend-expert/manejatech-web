@@ -3,22 +3,10 @@ import HomeView from '../views/HomeView.vue';
 import Auth from '../services/middleware';
 
 const routes = [
-  { path: '/', name: 'home', component: HomeView },
-  {
-    path: '/about',
-    name: 'about',
-
-    component: function () {
-      return import('../views/AboutView.vue')
-    }
-  },  
-  {
-    path: '/usuarios',
-    name: 'usuarios',
-   
-    component: () =>  import('../views/usuarios/')
-     // ,beforeEnter: Auth.auth,
-    
+  { 
+    path: '/', 
+    name: 'home', 
+    component: HomeView 
   },
 
   {
@@ -32,6 +20,27 @@ const routes = [
       return import('../views/Entrar.vue')    
     }
   },
+
+  {
+    path: '/about',
+    name: 'about',
+    beforeEnter: Auth.redirectionIfnotAuthenticated,
+
+    component: function () {
+      return import('../views/AboutView.vue')
+    }
+  },  
+
+  {
+    path: '/usuarios',
+    name: 'usuarios',
+   
+    component: () =>  import('../views/usuarios/')
+     // ,beforeEnter: Auth.auth,
+    
+  },
+
+  
 
   {
     path: '/teste-api',

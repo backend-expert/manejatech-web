@@ -1,0 +1,20 @@
+import Cookie from 'js-cookie';
+
+
+const TOKEN_NAME = 'token';
+
+export default {
+    setToken(token) {
+        Cookie.set(TOKEN_NAME, token, {
+            expires:30 //30 dias
+        });
+    },
+
+    getToken() {
+        return Cookie.get(TOKEN_NAME);
+    },
+
+    deleteToken() {
+        Cookie.remove(TOKEN_NAME);
+    },
+}

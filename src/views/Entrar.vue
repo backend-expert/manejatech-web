@@ -66,7 +66,8 @@
   // import axios from 'axios';
   import axios from '@/services/api';
   import message from '@/helpers/messages';
-  import Cookie from 'js-cookie';
+  // import Cookie from 'js-cookie';
+  import Cookie from '@/services/cookie';
   
   
     export default {
@@ -112,9 +113,8 @@
 
                 console.log('token', token);
 
-                Cookie.set('admin_token', token, {
-                    expires:30
-                });
+                // Cookie.set('admin_token', token, { expires:30 });
+                Cookie.setToken(token);
             })
             .catch((error) => {
                     this.spinner.login = false;
