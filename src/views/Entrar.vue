@@ -115,6 +115,11 @@
 
                 // Cookie.set('admin_token', token, { expires:30 });
                 Cookie.setToken(token);
+
+                // console.log(this.$router);
+                this.$store.commit('user/STORE_USER', response.data.data);
+
+                this.$router.replace('/');
             })
             .catch((error) => {
                     this.spinner.login = false;

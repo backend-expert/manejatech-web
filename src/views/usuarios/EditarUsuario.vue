@@ -20,6 +20,8 @@
 </template>
 
 <script>
+
+import axios from '@/services/api'
     export default {
         data() {
             return {
@@ -27,8 +29,8 @@
             }
         },
         created() {
-            this.axios
-                .get(`http://localhost:8000/api/products/${this.$route.params.id}`)
+            axios
+                .get(`usuario/${this.$route.params.id}`)
                 .then((res) => {
                     this.product = res.data;
                 });

@@ -1,12 +1,31 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import HomeView from '../views/HomeView.vue';
 import Auth from '../services/middleware';
+
+
+import Dashboard from '../views/DashboardView.vue';
+
+// Utilitários
+const Relatorios = () => import("@/views/relatorios");
+const TestesApi = () => import("@/views/TestesApi.vue");
+const Info = () => import("@/views/Info.vue");
+
+//Plantas
+const Plantas = () => import("@/views/plantas/Plantas.vue");
+const CadastrarPlanta = () => import("@/views/plantas/CadastrarPlanta.vue");
+const Planta = () => import("@/views/plantas/PerfilPlanta.vue");
+
+//Usuários
+const Usuarios = () => import("@/views/usuarios/");
+const CadastrarUsuario = () => import("@/views/usuarios/CadastrarUsuario.vue");
+const PerfilUsuario = () => import("@/views/usuarios/PerfilUsuario.vue");
+const EditarUsuario = () => import("@/views/usuarios/EditarUsuario.vue");
 
 const routes = [
   { 
     path: '/', 
     name: 'home', 
-    component: HomeView 
+    beforeEnter: Auth.redirectionIfnotAuthenticated,
+    component: Dashboard 
   },
 
   {
@@ -24,7 +43,6 @@ const routes = [
   {
     path: '/about',
     name: 'about',
-    beforeEnter: Auth.redirectionIfnotAuthenticated,
 
     component: function () {
       return import('../views/AboutView.vue')
@@ -34,39 +52,33 @@ const routes = [
   {
     path: '/usuarios',
     name: 'usuarios',
+    beforeEnter: Auth.redirectionIfnotAuthenticated,
    
-    component: () =>  import('../views/usuarios/')
+    component: Usuarios
      // ,beforeEnter: Auth.auth,
     
   },
-
-  
 
   {
     path: '/teste-api',
     name: 'teste-api',
 
-    component: function () {
-      return import('../views/TestesApi.vue')
-    }
+    component: TestesApi
+    
   },
 
   {
     path: '/info',
     name: 'info',
 
-    component: function () {
-      return import('../views/Info.vue')
-    }
+    component: Info
   },
 
   {
     path: '/relatorios',
     name: 'relatorios',
 
-    component: function () {
-      return import('../views/Relatorios/')
-    }
+    component:Relatorios,
   },  
 
   // route usuarios
@@ -74,9 +86,24 @@ const routes = [
     path: '/novo-usuario',
     name: 'novo-usuario',
 
-    component: function () {
-      return import('../views/usuarios/CadastrarUsuario.vue')
-    }
+    component: CadastrarUsuario,
+    
+  },
+
+  {
+    path: '/editar-usuario/:id',
+    name: 'editar-usuario',
+
+    component: EditarUsuario,
+    
+  },
+
+  {
+    path: '/perfil-usuario',
+    name: 'perfil-usuario',
+
+    component: PerfilUsuario,
+    
   },
 
 
@@ -85,24 +112,23 @@ const routes = [
     path: '/nova-planta',
     name: 'nova-planta',
 
-    component: function () {
-      return import('../views/plantas/CadastrarPlanta.vue')
-    }
+    component: CadastrarPlanta
   },
   {
     path: '/plantas',
     name: 'plantas',
-    // component: () => import('../views/Plantas.vue'),beforeEnter: Auth.auth,
+    
+    component: Plantas,
 
-    component: function () {
-      return import('../views/plantas/')
-    }
+    // component: function () {
+    //   return import('../views/plantas/')
+    // }
    
   },
   {
     path: '/planta',
     name: 'planta',
-    component: function () { return import('../views/plantas/Planta.vue') }
+    component: Planta
   
   },
 ]

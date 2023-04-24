@@ -31,8 +31,22 @@
                 class="form-control" 
                 id="floatingInput" 
                 placeholder="nome"
+                required
             >
-            <label for="floatingInput">Nome</label>
+            <label for="floatingInput">Nome*</label>
+        </div> <br>
+
+        <div class="form-floating">
+            
+            <input 
+                v-model="_sobrenome"
+                type="text" 
+                class="form-control" 
+                id="floatingInput" 
+                placeholder="Sobrenome"
+                required
+            >
+            <label for="floatingInput">Sobrenome*</label>
         </div> <br>
 
         <div class="form-floating">
@@ -43,8 +57,9 @@
                 class="form-control" 
                 id="floatingInput" 
                 placeholder="name@example.com"
+                required
             >
-            <label for="floatingInput">Email address</label>
+            <label for="floatingInput">Email*</label>
         </div> <br>
 
         <div class="form-floating">
@@ -79,13 +94,19 @@
                 class="form-control" 
                 id="floatingInput" 
                 placeholder="Telefone"
+                required
             >
-            <label for="floatingInput">Telefone</label>
+            <label for="floatingInput">Telefone*</label>
         </div> <br>
 
         <div class="form-group">
                         <label>Tipo</label>
-                        <select v-model="_perfil" name="_tipo" id="tipo">
+                        <select 
+                            v-model="_perfil" 
+                            name="_tipo" 
+                            id="tipo" 
+                            required
+                        >
                             <option value="1">Produtor </option>
                             <option value="2">Técnico</option>
                         </select>
@@ -101,6 +122,7 @@
                 class="form-control" 
                 id="floatingPassword" 
                 placeholder="Password"
+                required
             >
             <label for="floatingPassword">Password</label>
         </div> <br>          
@@ -170,6 +192,8 @@ methods: {
             perfil:this._perfil,
             password: this._password,
         };
+
+        console.log(payload);
 
         this.resetResponse();
 

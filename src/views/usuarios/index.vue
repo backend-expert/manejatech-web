@@ -18,22 +18,22 @@
           </tr>
           </thead>
           <tbody>
-          <!-- <tr 
+          <tr 
             v-for="user in users" 
             :key="user.id"
-            > -->
+            >
 
-          <tr>
-              <!-- <td>{{ user.id }}</td> -->
-              <td>23</td>
-              <td>cezar loures</td>
-              <td>cezar@gmail.com</td>
-              <td>Produtor</td>
+         
+              <td>{{ user.id }}</td>
+             
+              <td>{{ user.nome }}</td>
+              <td>{{ user.email }}</td>
+              <td></td>
               <td>
                   <div class="btn-group" role="group">
-                      <!-- <router-link :to="{name: 'edit', params: { id: product.id }}" class="btn btn-success">Edit</router-link> -->
-                      <router-link to="" class="btn btn-success">Visualizar</router-link>
-                      <router-link to="" class="btn btn-success">Editar</router-link>
+                      <router-link :to="{name: 'editar-usuario', params: { id: user.id }}" class="btn btn-success">Edit</router-link>
+                      <router-link to="perfil-usuario" class="btn btn-success">Perfil</router-link>
+                      <!-- <router-link to="" class="btn btn-success">Editar</router-link> -->
                       <!-- <button class="btn btn-danger" @click="deleteProduct(product.id)">Excluir</button> -->
                       <button class="btn btn-danger">Excluir</button>
                   </div>
@@ -46,26 +46,51 @@
 
 <script>
 import axios from '@/services/api';
+
+
+
   export default {
-    //   data() {
-    //       return {
-    //           users: []
-    //       }
-    //   },
-    //   created() {
-    //       axios.post('').then(response => {
-    //               this.users = response.data;
-    //           });
-    //   },
-    //   methods: {
-    //       deleteProduct(id) {
-    //           this.axios
-    //               .delete(`http://localhost:8000/api/products/${id}`)
-    //               .then(response => {
-    //                   let i = this.products.map(data => data.id).indexOf(id);
-    //                   this.products.splice(i, 1)
-    //               });
-    //       }
-    //   }
+      data() {
+          return { 
+            users: [],
+            spinner: {
+              get_users:false, 
+            }
+           
+          }
+      },
+      created() {
+        this.getUser()
+          // axios.post('').then(response => {
+          //         this.users = response.data;
+          //     });
+      },
+      methods: {
+
+       
+        getUser() {
+          this.spinner.get_users = true;
+
+          axios.post('/usuarios').then((response) => {
+            
+
+            this.users = response.data.data;
+          
+          }).finally(() => {
+
+            this.spinner.get_users = false;
+          
+          })
+        
+        }
+          // deleteProduct(id) {
+          //     this.axios
+          //         .delete(`http://localhost:8000/api/products/${id}`)
+          //         .then(response => {
+          //             let i = this.products.map(data => data.id).indexOf(id);
+          //             this.products.splice(i, 1)
+          //         });
+          // }
+      }
   }
 </script>

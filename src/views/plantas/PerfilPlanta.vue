@@ -1,7 +1,7 @@
 <template>
     <div>
       
-        <h3 class="text-center">Nome da Planta</h3>
+        <h3 class="text-center">Perfil Nome da Planta</h3>
         <div class="row">
             <div class="col-md-6">
                 

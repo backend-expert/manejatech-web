@@ -18,7 +18,7 @@
 
 <script>
 export default {
-  name: 'HelloWorld',
+  name: 'Dashboard',
   props: {
     msg: String
   }

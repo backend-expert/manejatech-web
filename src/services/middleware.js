@@ -24,8 +24,9 @@ export default {
         //     next('/entrar');
         // }
         if (token){
-            next('/about');
+            next('/');
         }
+        
 
         next();
     },
