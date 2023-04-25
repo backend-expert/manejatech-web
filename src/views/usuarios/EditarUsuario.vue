@@ -3,16 +3,32 @@
         <h3 class="text-center">Editar Usuário</h3>
         <div class="row">
             <div class="col-md-6">
-                <form @submit.prevent="updateProduct">
+
+                <form @submit.prevent="updateUser">
                     <div class="form-group">
                         <label>Name</label>
-                        <input type="text" class="form-control" v-model="product.name">
+                        <input 
+                            v-model="user.nome"
+                            type="text" 
+                            class="form-control" 
+                        >
                     </div>
+
                     <div class="form-group">
                         <label>Detail</label>
-                        <input type="text" class="form-control" v-model="product.detail">
+                        <input 
+                            v-model="user.email"
+                            type="email" 
+                            class="form-control"
+                        > 
                     </div>
-                    <button type="submit" class="btn btn-primary">Update</button>
+                    
+                    <button 
+                        type="submit" 
+                        class="btn btn-primary"
+                    >
+                        Enviar
+                    </button>
                 </form>
             </div>
         </div>
@@ -25,22 +41,33 @@ import axios from '@/services/api'
     export default {
         data() {
             return {
-                product: {}
+                user: {},
+                spinner:{
+                    get_user: false
+                },
+
             }
         },
+
         created() {
-            axios
-                .get(`usuario/${this.$route.params.id}`)
-                .then((res) => {
-                    this.product = res.data;
+
+            axios.get(`usuario/${this.$route.params.id}`)
+                .then((response) => {
+                    this.user = response.data;
                 });
         },
+
         methods: {
-            updateProduct() {
-                this.axios
-                    .patch(`http://localhost:8000/api/products/${this.$route.params.id}`, this.product)
-                    .then((res) => {
-                        this.$router.push({ name: 'home' });
+            updateUser() {
+                axios
+                    .patch(`usuario/${this.$route.params.id}`, this.user)
+                    .then(() => {
+                        // this.$router.push({ name: 'perfil-usuario'+$route.params.id });
+                    })
+                    .finally(() => {
+
+                        this.spinner.get_user = false;
+
                     });
             }
         }

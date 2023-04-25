@@ -2,8 +2,7 @@
   
     <main class="form-signin w-100 m-auto">
 
-
-    <form @submit.prevent="onSubmitRegister()">
+        <form @submit.prevent="onSubmitRegister()">
         <img class="mb-4" src="@/assets/images/logo.png" alt="" width="72" height="57">
 
         <div>
@@ -113,7 +112,6 @@
                     </div>
 
        
-
         <div class="form-floating">
 
             <input 
@@ -144,7 +142,7 @@
             Enviar
         </button>
        
-    </form>
+        </form>
     </main>
  <p class="mt-5 mb-3 text-body-secondary">&copy; 2017–2023</p>
 </template>

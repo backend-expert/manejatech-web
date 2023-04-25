@@ -47,28 +47,31 @@
 <script>
 import axios from '@/services/api';
 
-
-
   export default {
       data() {
           return { 
             users: [],
+
             spinner: {
               get_users:false, 
-            }
+            },
            
           }
       },
+
       created() {
+
         this.getUser()
           // axios.post('').then(response => {
           //         this.users = response.data;
           //     });
       },
+
       methods: {
 
        
         getUser() {
+
           this.spinner.get_users = true;
 
           axios.post('/usuarios').then((response) => {
@@ -80,7 +83,7 @@ import axios from '@/services/api';
 
             this.spinner.get_users = false;
           
-          })
+          });
         
         }
           // deleteProduct(id) {

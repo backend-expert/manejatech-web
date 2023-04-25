@@ -10,9 +10,10 @@ const TestesApi = () => import("@/views/TestesApi.vue");
 const Info = () => import("@/views/Info.vue");
 
 //Plantas
-const Plantas = () => import("@/views/plantas/Plantas.vue");
+const Plantas = () => import("@/views/plantas/PlantasView.vue");
 const CadastrarPlanta = () => import("@/views/plantas/CadastrarPlanta.vue");
-const Planta = () => import("@/views/plantas/PerfilPlanta.vue");
+const PerfilPlanta = () => import("@/views/plantas/PerfilPlanta.vue");
+const EditarPlanta = () => import("@/views/plantas/EditarPlantaView.vue");
 
 //Usuários
 const Usuarios = () => import("@/views/usuarios/");
@@ -85,6 +86,7 @@ const routes = [
   {
     path: '/novo-usuario',
     name: 'novo-usuario',
+    beforeEnter: Auth.redirectionIfnotAuthenticated,
 
     component: CadastrarUsuario,
     
@@ -93,6 +95,7 @@ const routes = [
   {
     path: '/editar-usuario/:id',
     name: 'editar-usuario',
+    beforeEnter: Auth.redirectionIfnotAuthenticated,
 
     component: EditarUsuario,
     
@@ -101,34 +104,42 @@ const routes = [
   {
     path: '/perfil-usuario',
     name: 'perfil-usuario',
+    beforeEnter: Auth.redirectionIfnotAuthenticated,
 
     component: PerfilUsuario,
     
   },
 
-
   // rotas plantas
   {
     path: '/nova-planta',
     name: 'nova-planta',
+    beforeEnter: Auth.redirectionIfnotAuthenticated,
 
     component: CadastrarPlanta
   },
   {
     path: '/plantas',
     name: 'plantas',
+    beforeEnter: Auth.redirectionIfnotAuthenticated,
     
     component: Plantas,
 
-    // component: function () {
-    //   return import('../views/plantas/')
-    // }
-   
   },
+  
   {
-    path: '/planta',
-    name: 'planta',
-    component: Planta
+    path: '/editar-planta/:id',
+    name: 'editar-planta',
+    component: EditarPlanta
+  
+  },
+  
+  {
+    path: '/perfil-planta/:id',
+    name: 'perfil-planta',
+    beforeEnter: Auth.redirectionIfnotAuthenticated,
+
+    component: PerfilPlanta
   
   },
 ]
