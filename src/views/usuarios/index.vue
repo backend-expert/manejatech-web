@@ -1,8 +1,29 @@
 <template>
   <div>
-      <h2 class="text-center">Lista de Usuários</h2>
+      <h2  class="text-center">
+
+        <div   
+          v-if="spinner.get_users" 
+          class="spinner-border text-warning" role="status"
+        >
+          <span class="visually-hidden">Loading...</span>
+        </div> 
+  
+        Lista de Usuários</h2>
     
       <router-link to="/novo-usuario" class="btn btn-success">Criar Novo</router-link>
+
+      <div
+            v-if="_response.message"
+            :class="`${_response.color}`">
+
+            <h3
+                :class="`${_response.color}`">
+
+                {{ _response.message }}
+            </h3>
+
+        </div>
 
 
       <table class="table">
@@ -12,9 +33,7 @@
               <th>Nome</th>
               <th>E-mail</th>
               <th>Tipo</th>
-              
-
-              <th>Detail</th>
+              <th>Ações</th>
               <!-- <th>Actions</th> -->
           </tr>
           </thead>
@@ -24,7 +43,6 @@
             :key="user.id"
             >
 
-         
               <td>{{ user.id }}</td>
              
               <td>{{ user.nome }}</td>
@@ -35,8 +53,8 @@
                       <router-link :to="{name: 'editar-usuario', params: { id: user.id }}" class="btn btn-success">Edit</router-link>
                       <router-link to="perfil-usuario" class="btn btn-success">Perfil</router-link>
                       <!-- <router-link to="" class="btn btn-success">Editar</router-link> -->
-                      <!-- <button class="btn btn-danger" @click="deleteProduct(product.id)">Excluir</button> -->
-                      <button class="btn btn-danger">Excluir</button>
+                      <button class="btn btn-danger" @click="deleteUser(user.id)">Excluir</button>
+                    
                   </div>
               </td>
           </tr>
@@ -57,6 +75,11 @@ import axios from '@/services/api';
           return { 
             users: [],
 
+            _response: {
+              color:'',
+              message:'',
+            },
+
             spinner: {
               get_users:false, 
             },
@@ -67,9 +90,7 @@ import axios from '@/services/api';
       created() {
 
         this.getUser()
-          // axios.post('').then(response => {
-          //         this.users = response.data;
-          //     });
+
       },
 
       methods: {
@@ -80,25 +101,36 @@ import axios from '@/services/api';
           
           axios.post('/usuarios').then((response) => {
             
-            
             this.users = response.data.data;
             
           }).finally(() => {
             
-          
             this.spinner.get_users = false;
           
           });
         
-        }
-          // deleteProduct(id) {
-          //     this.axios
-          //         .delete(`http://localhost:8000/api/products/${id}`)
-          //         .then(response => {
-          //             let i = this.products.map(data => data.id).indexOf(id);
-          //             this.products.splice(i, 1)
-          //         });
-          // }
+        },
+
+        deleteUser(id) {
+                if(confirm("Tem certeza que deseja EXCLUIR ?")){
+                    axios.delete(`/usuario/${id}`)
+                        .then(response => {
+                            let i = this.users.map(data => data.id).indexOf(id);
+                            this.users.splice(i, 1);
+
+                        }).catch((error) => {
+
+                            const errorCode = error?.response?.data?.error || 'ServerError';
+
+                            this._response.color = 'red',
+                            this._response.message = _messages[errorCode]
+
+                        }).finally(() => {                            
+
+                        })
+                };
+            }
+  
       }
   }
 </script>
