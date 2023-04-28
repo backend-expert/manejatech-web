@@ -7,7 +7,9 @@ const token = Cookie.getToken();
 
 
 const api = axios.create({
-    baseURL: "http://127.0.0.1:8000/api",
+    // baseURL: 'http://127.0.0.1:8000/api',
+    baseURL: process.env.VUE_APP_BASE_API,
+                
     headers: {
         'Content-Type': 'application/json',
         'Access': 'application/json',

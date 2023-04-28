@@ -7,7 +7,8 @@
     <router-link to="/entrar">Entrar</router-link> |
     <router-link to="/teste-api">Teste API</router-link> |
     <router-link to="/relatorios">Relatórios</router-link> |
-    <router-link to="/info">Info</router-link> 
+    <router-link to="/info">Info</router-link> | 
+    <router-link to="/teste-pagination">t-pa</router-link> 
   </nav>
   <router-view/>
 </template>

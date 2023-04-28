@@ -1,6 +1,7 @@
 <template>
   <div>
       <h2 class="text-center">Lista de Usuários</h2>
+    
       <router-link to="/novo-usuario" class="btn btn-success">Criar Novo</router-link>
 
 
@@ -45,9 +46,13 @@
 </template>
 
 <script>
+
+
 import axios from '@/services/api';
 
   export default {
+
+   
       data() {
           return { 
             users: [],
@@ -68,19 +73,19 @@ import axios from '@/services/api';
       },
 
       methods: {
-
-       
+        
         getUser() {
-
+          
           this.spinner.get_users = true;
-
+          
           axios.post('/usuarios').then((response) => {
             
-
+            
             this.users = response.data.data;
-          
+            
           }).finally(() => {
-
+            
+          
             this.spinner.get_users = false;
           
           });

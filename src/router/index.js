@@ -7,6 +7,7 @@ import Dashboard from '../views/DashboardView.vue';
 // Utilitários
 const Relatorios = () => import("@/views/relatorios");
 const TestesApi = () => import("@/views/TestesApi.vue");
+const TestePagination = () => import("@/views/TestePagination.View.vue");
 const Info = () => import("@/views/Info.vue");
 
 //Plantas
@@ -65,6 +66,14 @@ const routes = [
     name: 'teste-api',
 
     component: TestesApi
+    
+  },
+  {
+    path: '/teste-pagination',
+    name: '/teste-pagination',
+ 
+
+    component: TestePagination
     
   },
 
