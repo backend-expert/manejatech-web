@@ -67,6 +67,7 @@
                         
                         <button 
                             class="btn btn-danger" 
+                            @click="deletePlanta(planta.id)"
                            
                         > Excluir
 
@@ -79,7 +80,7 @@
         </table>
 
       
-        <!-- <Pagination :source="pagination" @navigate="navigate"></Pagination> -->
+    
 
        
 
@@ -100,7 +101,7 @@ import Pagination from "@/components/PaginationOffBug.vue";
     // export default {
     export default {
         components: {
-            // Pagination,
+          
         },
 
         data(){
@@ -119,9 +120,7 @@ import Pagination from "@/components/PaginationOffBug.vue";
                 },
 
 
-                // page:1,              
-                // next_page_url:'',
-                // pagination: {},
+              
 
 
             }
@@ -134,36 +133,18 @@ import Pagination from "@/components/PaginationOffBug.vue";
 
         methods:{
 
-          
-
-            // navigate(page) {
-            //     console.log(page);
-            //     axios.post('/plantas/pesquisar?page='+page).then((response) => {
-
-            
-            
-            //     this.plantas = response.data.data;
-           
-            //     this.pagination = response.data.data;
-
-            //     })
-
-            // },
-
+         
             getPlantas(){
 
                 this.spinner.get_plantas = true;
 
                 axios.post('/plantas/pesquisar').then((response) => {
-                // axios.post('/plantas/pesquisar?page='+this.next_page_url).then((response) => {
-
+            
                  
                 
                   
                     this.plantas = response.data.data;
-
-                    // this.pagination = response.data.data;
-                   
+  
                   
 
                 }).catch((error) => {
@@ -182,8 +163,28 @@ import Pagination from "@/components/PaginationOffBug.vue";
 
             },
 
-          
+            deletePlanta(id) {
+                if(confirm("Tem certeza que deseja EXCLUIR ?")){
+                    axios.delete(`/plantas/${id}`)
+                        .then(response => {
+                            let i = this.plantas.map(data => data.id).indexOf(id);
+                            this.plantas.splice(i, 1);
 
+                        }).catch((error) => {
+
+                            const errorCode = error?.response?.data?.error || 'ServerError';
+
+                            this._response.color = 'red',
+                            this._response.message = _messages[errorCode]
+
+                        }).finally(() => {                            
+
+                        })
+                };
+            }
+
+
+          
 
         },
 
