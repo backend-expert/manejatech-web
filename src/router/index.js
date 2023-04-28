@@ -111,7 +111,7 @@ const routes = [
   },
 
   {
-    path: '/perfil-usuario',
+    path: '/perfil-usuario/:id_user',
     name: 'perfil-usuario',
     beforeEnter: Auth.redirectionIfnotAuthenticated,
 

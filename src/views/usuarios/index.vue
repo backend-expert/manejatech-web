@@ -50,9 +50,19 @@
               <td></td>
               <td>
                   <div class="btn-group" role="group">
-                      <router-link :to="{name: 'editar-usuario', params: { id: user.id }}" class="btn btn-success">Edit</router-link>
-                      <router-link to="perfil-usuario" class="btn btn-success">Perfil</router-link>
-                      <!-- <router-link to="" class="btn btn-success">Editar</router-link> -->
+                      <router-link 
+                        :to="{name: 'editar-usuario', params: { id: user.id }}" 
+                        class="btn btn-success"
+                      > 
+                        Edit
+                      </router-link>
+                      <router-link 
+                        :to="{name:'perfil-usuario', params: { id_user: user.id }}" 
+                        class="btn btn-success"
+                      >
+                        Perfil
+                      </router-link>
+                      
                       <button class="btn btn-danger" @click="deleteUser(user.id)">Excluir</button>
                     
                   </div>
