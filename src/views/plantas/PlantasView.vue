@@ -67,7 +67,7 @@
                         
                         <button 
                             class="btn btn-danger" 
-                            @click="deletePlanta(planta.id)"
+                           
                         > Excluir
 
                         </button>
@@ -182,25 +182,7 @@ import Pagination from "@/components/PaginationOffBug.vue";
 
             },
 
-            deletePlanta(id) {
-                if(confirm("Tem certeza que deseja EXCLUIR ?")){
-                    axios.delete(`/plantas/${id}`)
-                        .then(response => {
-                            let i = this.plantas.map(data => data.id).indexOf(id);
-                            this.plantas.splice(i, 1);
-
-                        }).catch((error) => {
-
-                            const errorCode = error?.response?.data?.error || 'ServerError';
-
-                            this._response.color = 'red',
-                            this._response.message = _messages[errorCode]
-
-                        }).finally(() => {                            
-
-                        })
-                };
-            }
+          
 
 
         },
